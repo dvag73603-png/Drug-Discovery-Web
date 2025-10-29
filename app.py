@@ -74,6 +74,12 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    global model
+    
+    if model is None:
+        print("Model not initialized. Training model...")
+        train_model()
+    
     try:
         data = request.get_json()
         
