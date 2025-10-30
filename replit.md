@@ -18,6 +18,17 @@ The application is fully functional with:
 - Real-time predictions with confidence scores
 
 ## Recent Changes (October 30, 2025)
+
+### Latest Update: Medicine Search Feature ✨
+- **Medicine Database Search**: Added search box to look up any medicine by name
+- **Auto-Fill Functionality**: Automatically populates molecular properties from PubChem database
+- **PubChem API Integration**: Connected to world's largest free chemistry database (100M+ compounds)
+- **Real-Time Data**: Fetches Molecular Weight, LogP, H-Donors, and H-Acceptors instantly
+- **Error Handling**: Clear error messages for medicine not found or connection issues
+- **Rate Limiting**: Implemented proper API rate limiting (5 requests/second)
+- **Enter Key Support**: Press Enter to search for quicker interaction
+
+### Earlier Updates: UI Redesign
 - **Major UI Redesign**: Completely redesigned the landing page with modern professional layout
 - **Horizontal Input Layout**: Changed input fields from vertical to horizontal grid layout
 - **Molecular Illustrations**: Added custom SVG molecular structure graphics and animations
@@ -38,11 +49,12 @@ Previous Changes (October 29, 2025):
 ## Project Architecture
 
 ### Backend (app.py)
-- **Dataset Generation**: Creates 500 synthetic compound samples with realistic molecular properties
-- **Model Training**: RandomForestClassifier (100 estimators) trained on startup
+- **Lipinski's Rule of Five Implementation**: Direct rule-based prediction for drug-likeness
+- **PubChem API Integration**: Queries PubChem database for compound molecular properties
 - **API Endpoints**:
   - GET `/`: Serves the main web interface
-  - POST `/predict`: Accepts JSON with molecular features, returns prediction and confidence
+  - POST `/search`: Searches PubChem database by medicine name, returns molecular properties
+  - POST `/predict`: Accepts JSON with molecular features, returns prediction and confidence based on Lipinski's Rule
 
 ### Frontend
 - **templates/index.html**: Modern landing page with:
@@ -61,36 +73,58 @@ Previous Changes (October 29, 2025):
 
 ### Dependencies
 - Flask: Web framework
-- scikit-learn: Machine learning (RandomForestClassifier)
-- pandas: Data manipulation
-- numpy: Numerical operations
+- requests: HTTP library for PubChem API calls
+- Python 3.11: Programming language
 
 ## Features
-1. **Modern Landing Page**: Professional design with molecular illustrations
-2. **Horizontal Input Layout**: Four input fields in a clean row
-3. **Real-Time Predictions**: AJAX-based predictions without page reload
-4. **Visual Feedback**: Green for Active Drug, Red for Inactive Drug
-5. **Confidence Scores**: Percentage confidence displayed with results
-6. **Animated Graphics**: SVG molecules with floating and pulsing animations
-7. **About Section**: Educational content about drug discovery and Lipinski's Rule
-8. **Fully Responsive**: Mobile, tablet, and desktop optimized
-9. **Hover Effects**: Interactive elements with smooth transitions
-10. **Clean White & Orange Theme**: Professional pharmaceutical aesthetic
+1. **Medicine Database Search** 🔍: Search any medicine name to auto-fill molecular properties from PubChem
+2. **Auto-Fill from Database**: Instantly populate all four fields with real compound data
+3. **Modern Landing Page**: Professional design with molecular illustrations
+4. **Horizontal Input Layout**: Four input fields in a clean row
+5. **Real-Time Predictions**: AJAX-based predictions without page reload
+6. **Visual Feedback**: Green for Active Drug, Red for Inactive Drug
+7. **Lipinski's Rule of Five**: Evidence-based prediction algorithm used in pharmaceutical research
+8. **Animated Graphics**: SVG molecules with floating and pulsing animations
+9. **About Section**: Educational content about drug discovery and Lipinski's Rule
+10. **Fully Responsive**: Mobile, tablet, and desktop optimized
+11. **Hover Effects**: Interactive elements with smooth transitions
+12. **Clean White & Orange Theme**: Professional pharmaceutical aesthetic
+13. **Error Handling**: Clear feedback for search errors and invalid inputs
 
-## Model Details
-- Algorithm: RandomForestClassifier
-- Training samples: 400 (80% of dataset)
-- Test samples: 100 (20% of dataset)
-- Accuracy: ~84%
-- Features used: 4 molecular properties
-- Output: Binary classification (Active/Inactive)
+## Prediction Model Details
+- **Algorithm**: Lipinski's Rule of Five (rule-based system)
+- **Basis**: Pharmaceutical industry standard for drug-likeness evaluation
+- **Rules Evaluated**:
+  - Molecular Weight ≤ 500 Da
+  - LogP ≤ 5 (lipophilicity)
+  - Hydrogen Bond Donors ≤ 5
+  - Hydrogen Bond Acceptors ≤ 10
+- **Decision Criteria**: Compound must satisfy 3 out of 4 rules to be classified as "Active Drug"
+- **Confidence Score**: Based on percentage of rules satisfied (0-100%)
+- **Output**: Binary classification (Active/Inactive) with confidence percentage
 
 ## How to Use
-1. Enter molecular property values in the input fields
+
+### Method 1: Search Medicine Database (Recommended)
+1. Enter a medicine name in the search box (e.g., "Aspirin", "Ibuprofen", "Paracetamol")
+2. Click "Search" or press Enter
+3. The four molecular properties will automatically fill in
+4. Click "Predict" to see if it's an Active or Inactive drug
+5. View the prediction result and confidence score
+
+### Method 2: Manual Entry
+1. Manually enter molecular property values in the four input fields
 2. Click the "Predict" button
 3. View the prediction result and confidence score
-4. Try different values to see how the model responds
 
-## Example Input Values
+## Example Medicines to Search
+- **Aspirin**: Common pain reliever
+- **Ibuprofen**: Anti-inflammatory drug
+- **Paracetamol**: Pain and fever reducer (also known as Acetaminophen)
+- **Caffeine**: Stimulant found in coffee and tea
+- **Metformin**: Diabetes medication
+- **Atorvastatin**: Cholesterol-lowering drug (Lipitor)
+
+## Example Manual Input Values
 - **Active Drug Example**: MW=350, LogP=2.5, H-Donors=3, H-Acceptors=6
 - **Inactive Drug Example**: MW=600, LogP=6, H-Donors=7, H-Acceptors=12
