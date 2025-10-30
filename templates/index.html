@@ -8,8 +8,49 @@
 </head>
 <body>
     <div class="hero-section">
+        <svg class="molecule-decoration molecule-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="12" fill="#ff6b35" opacity="0.6"/>
+            <circle cx="100" cy="30" r="12" fill="#ff9a56" opacity="0.6"/>
+            <circle cx="150" cy="50" r="12" fill="#ff6b35" opacity="0.6"/>
+            <circle cx="100" cy="90" r="12" fill="#ff9a56" opacity="0.6"/>
+            <circle cx="130" cy="120" r="12" fill="#ff6b35" opacity="0.6"/>
+            <line x1="50" y1="50" x2="100" y2="30" stroke="#ff6b35" stroke-width="3" opacity="0.4"/>
+            <line x1="100" y1="30" x2="150" y2="50" stroke="#ff6b35" stroke-width="3" opacity="0.4"/>
+            <line x1="100" y1="30" x2="100" y2="90" stroke="#ff6b35" stroke-width="3" opacity="0.4"/>
+            <line x1="100" y1="90" x2="130" y2="120" stroke="#ff6b35" stroke-width="3" opacity="0.4"/>
+        </svg>
+        
+        <svg class="molecule-decoration molecule-2" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="75" cy="40" r="10" fill="#ff9a56" opacity="0.5"/>
+            <circle cx="40" cy="80" r="10" fill="#ff6b35" opacity="0.5"/>
+            <circle cx="110" cy="80" r="10" fill="#ff6b35" opacity="0.5"/>
+            <circle cx="75" cy="120" r="10" fill="#ff9a56" opacity="0.5"/>
+            <line x1="75" y1="40" x2="40" y2="80" stroke="#ff6b35" stroke-width="2" opacity="0.3"/>
+            <line x1="75" y1="40" x2="110" y2="80" stroke="#ff6b35" stroke-width="2" opacity="0.3"/>
+            <line x1="40" y1="80" x2="75" y2="120" stroke="#ff6b35" stroke-width="2" opacity="0.3"/>
+            <line x1="110" y1="80" x2="75" y2="120" stroke="#ff6b35" stroke-width="2" opacity="0.3"/>
+        </svg>
+
         <div class="container">
             <div class="header-content">
+                <div class="molecule-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="30" r="8" fill="#ff6b35"/>
+                        <circle cx="50" cy="20" r="8" fill="#ff9a56"/>
+                        <circle cx="80" cy="30" r="8" fill="#ff6b35"/>
+                        <circle cx="35" cy="60" r="8" fill="#ff9a56"/>
+                        <circle cx="65" cy="60" r="8" fill="#ff6b35"/>
+                        <circle cx="50" cy="85" r="8" fill="#ff9a56"/>
+                        <line x1="20" y1="30" x2="50" y2="20" stroke="#333" stroke-width="2"/>
+                        <line x1="50" y1="20" x2="80" y2="30" stroke="#333" stroke-width="2"/>
+                        <line x1="20" y1="30" x2="35" y2="60" stroke="#333" stroke-width="2"/>
+                        <line x1="50" y1="20" x2="35" y2="60" stroke="#333" stroke-width="2"/>
+                        <line x1="50" y1="20" x2="65" y2="60" stroke="#333" stroke-width="2"/>
+                        <line x1="80" y1="30" x2="65" y2="60" stroke="#333" stroke-width="2"/>
+                        <line x1="35" y1="60" x2="50" y2="85" stroke="#333" stroke-width="2"/>
+                        <line x1="65" y1="60" x2="50" y2="85" stroke="#333" stroke-width="2"/>
+                    </svg>
+                </div>
                 <h1 class="main-heading">🧪 Drug Discovery Prediction</h1>
                 <p class="subtitle">Predict whether a compound is Active or Inactive based on chemical properties</p>
             </div>
@@ -69,19 +110,45 @@
                 
                 <div class="about-grid">
                     <div class="about-card">
-                        <div class="card-icon">🔬</div>
+                        <svg class="card-svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="40" width="60" height="40" rx="5" fill="none" stroke="#ff6b35" stroke-width="3"/>
+                            <circle cx="30" cy="55" r="3" fill="#ff6b35"/>
+                            <circle cx="50" cy="55" r="3" fill="#ff6b35"/>
+                            <circle cx="70" cy="55" r="3" fill="#ff6b35"/>
+                            <rect x="25" y="25" width="50" height="10" rx="2" fill="#ff9a56"/>
+                            <line x1="35" y1="30" x2="35" y2="20" stroke="#ff6b35" stroke-width="2"/>
+                            <circle cx="35" cy="15" r="4" fill="#ff6b35"/>
+                        </svg>
                         <h3>Machine Learning</h3>
                         <p>This web app uses advanced machine learning algorithms with RandomForest classifier to predict drug activity with 84% accuracy.</p>
                     </div>
 
                     <div class="about-card">
-                        <div class="card-icon">⚗️</div>
+                        <svg class="card-svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="70" rx="25" ry="12" fill="none" stroke="#ff6b35" stroke-width="2"/>
+                            <path d="M 25 70 Q 30 50 50 35 Q 70 50 75 70" fill="none" stroke="#ff6b35" stroke-width="3"/>
+                            <circle cx="50" cy="35" r="8" fill="#ff9a56"/>
+                            <line x1="50" y1="35" x2="50" y2="15" stroke="#ff6b35" stroke-width="2"/>
+                            <line x1="45" y1="20" x2="55" y2="20" stroke="#ff6b35" stroke-width="2"/>
+                            <line x1="42" y1="25" x2="58" y2="25" stroke="#ff6b35" stroke-width="2"/>
+                        </svg>
                         <h3>Lipinski's Rule of Five</h3>
                         <p>Our prediction model is based on Lipinski's Rule of Five, which evaluates drug-likeness based on molecular properties like weight, LogP, and hydrogen bonding.</p>
                     </div>
 
                     <div class="about-card">
-                        <div class="card-icon">💡</div>
+                        <svg class="card-svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="30" fill="none" stroke="#ff6b35" stroke-width="3"/>
+                            <circle cx="35" cy="35" r="6" fill="#ff9a56"/>
+                            <circle cx="65" cy="35" r="6" fill="#ff9a56"/>
+                            <circle cx="50" cy="60" r="6" fill="#ff9a56"/>
+                            <circle cx="35" cy="65" r="6" fill="#ff6b35"/>
+                            <circle cx="65" cy="65" r="6" fill="#ff6b35"/>
+                            <line x1="35" y1="35" x2="50" y2="60" stroke="#ff6b35" stroke-width="2"/>
+                            <line x1="65" y1="35" x2="50" y2="60" stroke="#ff6b35" stroke-width="2"/>
+                            <line x1="50" y1="60" x2="35" y2="65" stroke="#ff6b35" stroke-width="2"/>
+                            <line x1="50" y1="60" x2="65" y2="65" stroke="#ff6b35" stroke-width="2"/>
+                        </svg>
                         <h3>Active Drug Candidate</h3>
                         <p>The system determines whether a compound can be an active drug candidate by analyzing its chemical properties and comparing them against successful drug patterns.</p>
                     </div>

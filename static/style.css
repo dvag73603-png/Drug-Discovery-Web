@@ -49,6 +49,54 @@ body {
     z-index: 0;
 }
 
+.molecule-decoration {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.4;
+    animation: float 6s ease-in-out infinite;
+}
+
+.molecule-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    right: 5%;
+    animation-delay: 0s;
+}
+
+.molecule-2 {
+    width: 150px;
+    height: 150px;
+    bottom: 15%;
+    left: 8%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+.molecule-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
 .header-content {
     text-align: center;
     margin-bottom: 50px;
@@ -289,6 +337,18 @@ body {
 .card-icon {
     font-size: 3em;
     margin-bottom: 20px;
+}
+
+.card-svg-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.about-card:hover .card-svg-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .about-card h3 {
