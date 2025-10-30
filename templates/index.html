@@ -7,54 +7,98 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🧪 Drug Discovery Prediction</h1>
-            <p class="subtitle">Predict whether a compound is an Active or Inactive drug</p>
-        </header>
+    <div class="hero-section">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="main-heading">🧪 Drug Discovery Prediction</h1>
+                <p class="subtitle">Predict whether a compound is Active or Inactive based on chemical properties</p>
+            </div>
 
-        <div class="card">
-            <form id="predictionForm">
-                <div class="form-group">
-                    <label for="molecular_weight">Molecular Weight (g/mol)</label>
-                    <input type="number" id="molecular_weight" name="molecular_weight" 
-                           step="0.01" min="0" required
-                           placeholder="e.g., 350.5">
+            <div class="prediction-card">
+                <form id="predictionForm">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="molecular_weight">Molecular Weight</label>
+                            <input type="number" id="molecular_weight" name="molecular_weight" 
+                                   step="0.01" min="0" required placeholder="e.g., 350">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="logp">LogP Value</label>
+                            <input type="number" id="logp" name="logp" 
+                                   step="0.01" required placeholder="e.g., 2.5">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="h_donors">Hydrogen Donors</label>
+                            <input type="number" id="h_donors" name="h_donors" 
+                                   min="0" step="1" required placeholder="e.g., 3">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="h_acceptors">Hydrogen Acceptors</label>
+                            <input type="number" id="h_acceptors" name="h_acceptors" 
+                                   min="0" step="1" required placeholder="e.g., 6">
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <button type="submit" class="predict-btn">Predict</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="resultSection" class="result-section hidden">
+                <div class="result-card">
+                    <div class="result-icon" id="resultIcon">💊</div>
+                    <h2 class="result-title">Prediction Result</h2>
+                    <div id="predictionResult" class="prediction-text"></div>
+                    <div id="confidenceResult" class="confidence-text"></div>
                 </div>
-
-                <div class="form-group">
-                    <label for="logp">LogP Value</label>
-                    <input type="number" id="logp" name="logp" 
-                           step="0.01" required
-                           placeholder="e.g., 2.5">
-                </div>
-
-                <div class="form-group">
-                    <label for="h_donors">Number of Hydrogen Donors</label>
-                    <input type="number" id="h_donors" name="h_donors" 
-                           min="0" step="1" required
-                           placeholder="e.g., 3">
-                </div>
-
-                <div class="form-group">
-                    <label for="h_acceptors">Number of Hydrogen Acceptors</label>
-                    <input type="number" id="h_acceptors" name="h_acceptors" 
-                           min="0" step="1" required
-                           placeholder="e.g., 6">
-                </div>
-
-                <button type="submit" class="predict-btn">Predict</button>
-            </form>
-        </div>
-
-        <div id="resultContainer" class="result-container hidden">
-            <div id="resultCard" class="result-card">
-                <h2>Prediction Result</h2>
-                <div id="predictionResult" class="prediction-result"></div>
-                <div id="confidenceResult" class="confidence-result"></div>
             </div>
         </div>
     </div>
+
+    <div class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-header">
+                    <h2>About Drug Discovery</h2>
+                    <div class="decorative-line"></div>
+                </div>
+                
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="card-icon">🔬</div>
+                        <h3>Machine Learning</h3>
+                        <p>This web app uses advanced machine learning algorithms with RandomForest classifier to predict drug activity with 84% accuracy.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">⚗️</div>
+                        <h3>Lipinski's Rule of Five</h3>
+                        <p>Our prediction model is based on Lipinski's Rule of Five, which evaluates drug-likeness based on molecular properties like weight, LogP, and hydrogen bonding.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">💡</div>
+                        <h3>Active Drug Candidate</h3>
+                        <p>The system determines whether a compound can be an active drug candidate by analyzing its chemical properties and comparing them against successful drug patterns.</p>
+                    </div>
+                </div>
+
+                <div class="info-banner">
+                    <p><strong>How it works:</strong> Enter the four key molecular properties of your compound. Our trained model analyzes these features to predict whether the compound is likely to be an Active or Inactive drug candidate. The prediction comes with a confidence score to help you assess the reliability of the result.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🧬 Drug Discovery Prediction System | Machine Learning for Pharmaceutical Research</p>
+        </div>
+    </footer>
 
     <script>
         document.getElementById('predictionForm').addEventListener('submit', async function(e) {
@@ -79,17 +123,23 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    document.getElementById('predictionResult').textContent = result.prediction;
-                    document.getElementById('confidenceResult').textContent = `Confidence: ${result.confidence}`;
+                    const resultSection = document.getElementById('resultSection');
+                    const predictionResult = document.getElementById('predictionResult');
+                    const confidenceResult = document.getElementById('confidenceResult');
+                    const resultIcon = document.getElementById('resultIcon');
                     
-                    const resultCard = document.getElementById('resultCard');
+                    predictionResult.textContent = result.prediction;
+                    confidenceResult.textContent = `Confidence: ${result.confidence}`;
+                    
                     if (result.prediction === 'Active Drug') {
-                        resultCard.className = 'result-card active';
+                        resultSection.className = 'result-section active';
+                        resultIcon.textContent = '✅';
                     } else {
-                        resultCard.className = 'result-card inactive';
+                        resultSection.className = 'result-section inactive';
+                        resultIcon.textContent = '❌';
                     }
                     
-                    document.getElementById('resultContainer').classList.remove('hidden');
+                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 } else {
                     alert('Error: ' + result.error);
                 }
