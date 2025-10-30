@@ -55,6 +55,15 @@
                 <p class="subtitle">Predict whether a compound is Active or Inactive based on chemical properties</p>
             </div>
 
+            <div class="search-card">
+                <h3 class="search-title">🔍 Search Medicine Database</h3>
+                <div class="search-box">
+                    <input type="text" id="medicineSearch" placeholder="Enter medicine name (e.g., Aspirin, Ibuprofen, Paracetamol)">
+                    <button type="button" id="searchBtn" class="search-btn">Search</button>
+                </div>
+                <div id="searchStatus" class="search-status"></div>
+            </div>
+
             <div class="prediction-card">
                 <form id="predictionForm">
                     <div class="input-row">
@@ -168,6 +177,60 @@
     </footer>
 
     <script>
+        document.getElementById('searchBtn').addEventListener('click', async function() {
+            const medicineSearch = document.getElementById('medicineSearch');
+            const searchStatus = document.getElementById('searchStatus');
+            const medicineName = medicineSearch.value.trim();
+            
+            if (!medicineName) {
+                searchStatus.className = 'search-status error';
+                searchStatus.textContent = '⚠️ Please enter a medicine name';
+                return;
+            }
+            
+            searchStatus.className = 'search-status loading';
+            searchStatus.textContent = '🔄 Searching...';
+            
+            try {
+                const response = await fetch('/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ medicine_name: medicineName })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('molecular_weight').value = result.data.molecular_weight.toFixed(2);
+                    document.getElementById('logp').value = result.data.logp.toFixed(2);
+                    document.getElementById('h_donors').value = result.data.h_donors;
+                    document.getElementById('h_acceptors').value = result.data.h_acceptors;
+                    
+                    searchStatus.className = 'search-status success';
+                    searchStatus.textContent = `✅ Found! "${medicineName}" data loaded successfully`;
+                    
+                    setTimeout(() => {
+                        searchStatus.textContent = '';
+                    }, 5000);
+                } else {
+                    searchStatus.className = 'search-status error';
+                    searchStatus.textContent = `❌ ${result.error}`;
+                }
+            } catch (error) {
+                searchStatus.className = 'search-status error';
+                searchStatus.textContent = '❌ Error connecting to database. Please try again.';
+                console.error('Error:', error);
+            }
+        });
+        
+        document.getElementById('medicineSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchBtn').click();
+            }
+        });
+        
         document.getElementById('predictionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
