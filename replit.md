@@ -17,7 +17,17 @@ The application is fully functional with:
 - Orange-themed responsive web interface
 - Real-time predictions with confidence scores
 
-## Recent Changes (October 29, 2025)
+## Recent Changes (October 30, 2025)
+- **Major UI Redesign**: Completely redesigned the landing page with modern professional layout
+- **Horizontal Input Layout**: Changed input fields from vertical to horizontal grid layout
+- **Molecular Illustrations**: Added custom SVG molecular structure graphics and animations
+- **About Section**: Implemented comprehensive About section with three cards explaining ML, Lipinski's Rule, and drug candidates
+- **Visual Enhancements**: Added floating molecule decorations, pulsing animations, and hover effects
+- **White & Orange Theme**: Redesigned color scheme with white background and orange accents
+- **Responsive Design**: Enhanced mobile and tablet responsiveness with breakpoints
+- **Professional Landing Page**: Transformed into a real-world web application appearance
+
+Previous Changes (October 29, 2025):
 - Initial project setup with Flask, scikit-learn, pandas, and numpy
 - Created synthetic drug compound dataset (500 samples)
 - Implemented RandomForestClassifier model training
@@ -35,9 +45,19 @@ The application is fully functional with:
   - POST `/predict`: Accepts JSON with molecular features, returns prediction and confidence
 
 ### Frontend
-- **templates/index.html**: Single-page application with input form and results display
-- **static/style.css**: Orange gradient theme with responsive design
-- **JavaScript**: Handles form submission and dynamic result display
+- **templates/index.html**: Modern landing page with:
+  - SVG molecular illustrations (floating decorations and icons)
+  - Horizontal 4-column input grid
+  - About section with three informational cards
+  - Result display area with animations
+  - Information banner explaining how it works
+- **static/style.css**: Professional white & orange theme with:
+  - CSS animations (floating, pulsing, bouncing)
+  - Hover effects on cards and buttons
+  - Gradient backgrounds and shadows
+  - Responsive grid layouts with media queries
+  - Modern typography and spacing
+- **JavaScript**: Handles form submission, API calls, and dynamic result display with smooth animations
 
 ### Dependencies
 - Flask: Web framework
@@ -46,12 +66,16 @@ The application is fully functional with:
 - numpy: Numerical operations
 
 ## Features
-1. User-friendly input form with validation
-2. Real-time prediction without page reload
-3. Visual feedback (green for Active, red for Inactive)
-4. Prediction confidence percentage
-5. Clean, professional orange-themed design
-6. Responsive layout for mobile and desktop
+1. **Modern Landing Page**: Professional design with molecular illustrations
+2. **Horizontal Input Layout**: Four input fields in a clean row
+3. **Real-Time Predictions**: AJAX-based predictions without page reload
+4. **Visual Feedback**: Green for Active Drug, Red for Inactive Drug
+5. **Confidence Scores**: Percentage confidence displayed with results
+6. **Animated Graphics**: SVG molecules with floating and pulsing animations
+7. **About Section**: Educational content about drug discovery and Lipinski's Rule
+8. **Fully Responsive**: Mobile, tablet, and desktop optimized
+9. **Hover Effects**: Interactive elements with smooth transitions
+10. **Clean White & Orange Theme**: Professional pharmaceutical aesthetic
 
 ## Model Details
 - Algorithm: RandomForestClassifier
